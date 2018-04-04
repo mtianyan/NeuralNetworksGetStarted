@@ -301,20 +301,6 @@ if __name__ == '__main__':
     # net.SGD(training_data, 60, mini_batch_size, 0.1, validation_data, test_data)
 
     # # 使用Relu替代sigmoid
-    net = Network([
-        ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28),
-            filter_shape=(20, 1, 5, 5),
-            poolsize=(2,2),
-            activation_fn=ReLU),
-        ConvPoolLayer(image_shape=(mini_batch_size, 20, 12, 12),
-            filter_shape=(40, 20, 5, 5),
-            poolsize=(2,2),
-            activation_fn=ReLU),
-        FullyConnectedLayer(n_in=40*4*4, n_out=100, activation_fn=ReLU),
-        SoftmaxLayer(n_in=100, n_out=10)], mini_batch_size)
-    net.SGD(training_data, 60, mini_batch_size, 0.1, validation_data, test_data)
-    #
-    # # 加上dropout
     # net = Network([
     #     ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28),
     #         filter_shape=(20, 1, 5, 5),
@@ -324,7 +310,22 @@ if __name__ == '__main__':
     #         filter_shape=(40, 20, 5, 5),
     #         poolsize=(2,2),
     #         activation_fn=ReLU),
-    #     FullyConnectedLayer(n_in=40*4*4, n_out=100,
-    #                         activation_fn=ReLU, p_dropout=0.5),
+    #     FullyConnectedLayer(n_in=40*4*4, n_out=100, activation_fn=ReLU),
     #     SoftmaxLayer(n_in=100, n_out=10)], mini_batch_size)
+    # net.SGD(training_data, 60, mini_batch_size, 0.1, validation_data, test_data)
+
+    # # 加上dropout
+    net = Network([
+        ConvPoolLayer(image_shape=(mini_batch_size, 1, 28, 28),
+            filter_shape=(20, 1, 5, 5),
+            poolsize=(2,2),
+            activation_fn=ReLU),
+        ConvPoolLayer(image_shape=(mini_batch_size, 20, 12, 12),
+            filter_shape=(40, 20, 5, 5),
+            poolsize=(2,2),
+            activation_fn=ReLU),
+        FullyConnectedLayer(n_in=40*4*4, n_out=100,
+                            activation_fn=ReLU, p_dropout=0.5),
+        SoftmaxLayer(n_in=100, n_out=10)], mini_batch_size)
+    net.SGD(training_data, 60, mini_batch_size, 0.1, validation_data, test_data)
 
