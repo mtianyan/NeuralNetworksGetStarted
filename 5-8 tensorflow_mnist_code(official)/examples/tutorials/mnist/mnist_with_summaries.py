@@ -36,7 +36,7 @@ FLAGS = None
 
 
 def train():
-  # Import data
+  # Import mnist_data
   mnist = input_data.read_data_sets(FLAGS.data_dir,
                                     fake_data=FLAGS.fake_data)
 
@@ -144,10 +144,10 @@ def train():
 
   # Train the model, and also write summaries.
   # Every 10th step, measure test-set accuracy, and write test summaries
-  # All other steps, run train_step on training data, & add training summaries
+  # All other steps, run train_step on training mnist_data, & add training summaries
 
   def feed_dict(train):
-    """Make a TensorFlow feed_dict: maps data onto Tensor placeholders."""
+    """Make a TensorFlow feed_dict: maps mnist_data onto Tensor placeholders."""
     if train or FLAGS.fake_data:
       xs, ys = mnist.train.next_batch(100, fake_data=FLAGS.fake_data)
       k = FLAGS.dropout
@@ -190,7 +190,7 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--fake_data', nargs='?', const=True, type=bool,
                       default=False,
-                      help='If true, uses fake data for unit testing.')
+                      help='If true, uses fake mnist_data for unit testing.')
   parser.add_argument('--max_steps', type=int, default=1000,
                       help='Number of steps to run trainer.')
   parser.add_argument('--learning_rate', type=float, default=0.001,
@@ -202,7 +202,7 @@ if __name__ == '__main__':
       type=str,
       default=os.path.join(os.getenv('TEST_TMPDIR', '/tmp'),
                            'tensorflow/mnist/input_data'),
-      help='Directory for storing input data')
+      help='Directory for storing input mnist_data')
   parser.add_argument(
       '--log_dir',
       type=str,

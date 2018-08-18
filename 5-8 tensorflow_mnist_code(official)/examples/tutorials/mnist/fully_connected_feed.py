@@ -40,7 +40,7 @@ def placeholder_inputs(batch_size):
   """Generate placeholder variables to represent the input tensors.
 
   These placeholders are used as inputs by the rest of the model building
-  code and will be fed from the downloaded data in the .run() loop, below.
+  code and will be fed from the downloaded mnist_data in the .run() loop, below.
 
   Args:
     batch_size: The batch size will be baked into both placeholders.
@@ -51,7 +51,7 @@ def placeholder_inputs(batch_size):
   """
   # Note that the shapes of the placeholders match the shapes of the full
   # image and label tensors, except the first dimension is now batch_size
-  # rather than the full size of the train or test data sets.
+  # rather than the full size of the train or test mnist_data sets.
   # 创建占位符, 使用float32类型, shape为batchsizes和IMAGE_PIXELS
   images_placeholder = tf.placeholder(tf.float32, shape=(batch_size,
                                                          mnist.IMAGE_PIXELS))
@@ -94,7 +94,7 @@ def do_eval(sess,
             images_placeholder,
             labels_placeholder,
             data_set):
-  """Runs one evaluation against the full epoch of data.
+  """Runs one evaluation against the full epoch of mnist_data.
 
   Args:
     sess: The session in which the model has been trained.
@@ -269,19 +269,19 @@ if __name__ == '__main__':
       type=str,
       default=os.path.join(os.getenv('TEST_TMPDIR', './tmp'),
                            '/tensorflow/mnist/input_data'),
-      help='Directory to put the input data.'
+      help='Directory to put the input mnist_data.'
   )
   parser.add_argument(
       '--log_dir',
       type=str,
       default=os.path.join(os.getenv('TEST_TMPDIR', './tmp'),
                            '/tensorflow/mnist/logs/fully_connected_feed'),
-      help='Directory to put the log data.'
+      help='Directory to put the log mnist_data.'
   )
   parser.add_argument(
       '--fake_data',
       default=False,
-      help='If true, uses fake data for unit testing.',
+      help='If true, uses fake mnist_data for unit testing.',
       action='store_true'
   )
   default = os.path.join(os.getenv('TEST_TMPDIR', './tmp'),
